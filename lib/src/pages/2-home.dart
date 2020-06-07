@@ -1,14 +1,6 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return HomePageState();
-  }
-}
-
-class HomePageState extends State<HomePage>{
-  int _currentIndex = 0;
+class HomePage extends StatelessWidget {
   build(context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -27,30 +19,7 @@ class HomePageState extends State<HomePage>{
             ],
           ),
         ),
-        bottomNavigationBar: _bottomNavigationBar(),
       ),
-    );
-  }
-
-  Widget _bottomNavigationBar() {
-    return BottomNavigationBar(
-      currentIndex: _currentIndex,
-      type: BottomNavigationBarType.fixed,
-      items: [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          title: Text('Home'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          title: Text('Profile'),
-        ),
-      ],
-      onTap: (index){
-        setState(() {
-          _currentIndex = index;
-        });
-      },
     );
   }
 }
