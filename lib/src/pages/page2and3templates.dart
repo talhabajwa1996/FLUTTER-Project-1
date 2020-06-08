@@ -19,7 +19,9 @@ class Template2And3State extends State<Template2And3> {
   build(context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(pageTitle(_currentIndex)),
+        title: Text(
+          pageTitle(_currentIndex),
+        ),
         centerTitle: true,
       ),
       resizeToAvoidBottomPadding: false,
@@ -109,8 +111,7 @@ class Template2And3State extends State<Template2And3> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
           ),
-          onPressed: () {
-          },
+          onPressed: () {},
         ),
       ),
     );
@@ -125,9 +126,9 @@ class Template2And3State extends State<Template2And3> {
           fontSize: 15,
         ),
       ),
-      onTap: (){
+      onTap: () {
         setState(() {
-          _currentIndex =0;
+          _currentIndex = 0;
         });
         Navigator.pop(context);
       },
@@ -143,9 +144,9 @@ class Template2And3State extends State<Template2And3> {
           fontSize: 15,
         ),
       ),
-      onTap: (){
+      onTap: () {
         setState(() {
-          _currentIndex =1;
+          _currentIndex = 1;
         });
         Navigator.pop(context);
       },

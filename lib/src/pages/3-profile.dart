@@ -1,4 +1,5 @@
 import 'package:App_Project1/src/BLOC/provider.dart';
+import 'package:App_Project1/src/pages/1-login.dart';
 import 'package:flutter/material.dart';
 import '../BLOC/bloc.dart';
 
@@ -99,7 +100,7 @@ class ProfilePage extends StatelessWidget {
             onPressed: snapshot.hasData
                 ? () {
                     bloc.submit();
-                    Navigator.pop(context);
+                    Navigator.of(context).pop();
                   }
                 : null,
           ),

@@ -115,7 +115,7 @@ class LoginPage extends StatelessWidget {
             onPressed: snapshot.hasData
                 ? () {
                     bloc.submit();
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => Template2And3(),
