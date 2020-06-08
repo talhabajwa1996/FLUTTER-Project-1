@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import '../mixins/email&passwordMixin.dart';
-import '../navigationBar.dart';
+import '../BLOC/bloc.dart';
+import '../BLOC/provider.dart';
+import 'page2and3templates.dart';
 
-class LoginPage extends StatelessWidget with EmailAndPasswordFields {
+class LoginPage extends StatelessWidget {
   build(context) {
+    final bloc = Provider.of(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        resizeToAvoidBottomPadding: false,
         body: Container(
           margin: EdgeInsets.all(20.0),
           child: Column(
@@ -14,12 +17,12 @@ class LoginPage extends StatelessWidget with EmailAndPasswordFields {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               loginWidget(),
+              SizedBox(height: 80.0),
+              email(bloc),
               SizedBox(height: 20.0),
-              email(),
+              password(bloc),
               SizedBox(height: 20.0),
-              password(),
-              SizedBox(height: 20.0),
-              SubmitButton(),
+              submitButton(bloc),
             ],
           ),
         ),
@@ -29,7 +32,7 @@ class LoginPage extends StatelessWidget with EmailAndPasswordFields {
 
   Widget loginWidget() {
     return Container(
-      margin: EdgeInsetsDirectional.only(top:20.0),
+      margin: EdgeInsetsDirectional.only(top: 20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -43,39 +46,86 @@ class LoginPage extends StatelessWidget with EmailAndPasswordFields {
           Text(
             'Login',
             style: TextStyle(
-              fontSize:40,
+              fontSize: 40,
               fontFamily: 'SourceSansLight',
               fontWeight: FontWeight.w700,
-
             ),
           ),
         ],
       ),
     );
   }
-}
 
-class SubmitButton extends StatelessWidget {
-  @override
-  build(context) {
-    return ButtonTheme(
-      minWidth: 400.0,
-      child: RaisedButton(
-        child: Text(
-          'Submit',
-        ),
-        color: Colors.blue,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0)),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => NavigationBar(),
+  Widget email(Bloc bloc) {
+    return StreamBuilder(
+      stream: bloc.email,
+      builder: (context, snapshot) {
+        return TextField(
+          onChanged: bloc.changeEmail,
+          keyboardType: TextInputType.emailAddress,
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(40.0),
             ),
-          );
-        },
-      ),
+            prefixIcon: Icon(Icons.email),
+            hintText: 'Email',
+            errorText: snapshot.error,
+          ),
+        );
+      },
+    );
+  }
+
+  Widget password(Bloc bloc) {
+    return StreamBuilder(
+      stream: bloc.password,
+      builder: (context, snapshot) {
+        return TextField(
+          onChanged: bloc.changePassword,
+          obscureText: true,
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(40.0),
+            ),
+            prefixIcon: Icon(Icons.lock),
+            hintText: 'Password',
+            errorText: snapshot.error,
+          ),
+        );
+      },
+    );
+  }
+
+  Widget submitButton(Bloc bloc) {
+    return StreamBuilder(
+      stream: bloc.emailAndpassword,
+      builder: (context, snapshot) {
+        return ButtonTheme(
+          minWidth: 400.0,
+          child: RaisedButton(
+            child: Text(
+              'Submit',
+            ),
+            textColor: Colors.white,
+            color: Colors.blue,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18.0)),
+            onPressed: snapshot.hasData
+                ? () {
+                    bloc.submit();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Template2And3(),
+                      ),
+                    );
+                  }
+                : null,
+          ),
+        );
+      },
     );
   }
 }

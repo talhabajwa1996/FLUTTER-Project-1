@@ -5,10 +5,7 @@ class HomePage extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text('Home'),
-        ),
+        resizeToAvoidBottomPadding: false,
         body: Container(
           margin: EdgeInsets.all(8.0),
           child: Column(

@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'src/pages/1-login.dart';
+import 'src/BLOC/provider.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatefulWidget{
-  @override
-  State<StatefulWidget> createState() {
-    return MyAppState();
-  }
-}
-
-class MyAppState extends State<MyApp> {
+class MyApp extends StatelessWidget {
   build(context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+    return Provider(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: LoginPage(),
+      ),
     );
   }
 }
