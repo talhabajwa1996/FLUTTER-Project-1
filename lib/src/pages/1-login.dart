@@ -12,38 +12,33 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> {
-
-
-    void _changeLanguage(Language language) async {
+  void _changeLanguage(Language language) async {
     Locale _temp = await setLocale(language.languageCode);
 
     MyApp.setLocale(context, _temp);
   }
 
-
   build(context) {
     final bloc = Provider.of(context);
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        resizeToAvoidBottomPadding: false,
-        body: Container(
-          margin: EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              loginWidget(),
-              SizedBox(height: 80.0),
-              email(bloc),
-              SizedBox(height: 20.0),
-              password(bloc),
-              SizedBox(height: 20.0),
-              submitButton(bloc),
-              SizedBox(height: 20.0),
-              _dropDownMenu(),
-            ],
-          ),
+    return Scaffold(
+      resizeToAvoidBottomPadding: false,
+      body: Container(
+        margin: EdgeInsets.all(20.0),
+        // child: _dropDownMenu(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            loginWidget(),
+            SizedBox(height: 80.0),
+            email(bloc),
+            SizedBox(height: 20.0),
+            password(bloc),
+            SizedBox(height: 20.0),
+            submitButton(bloc),
+            SizedBox(height: 20.0),
+            _dropDownMenu(),
+          ],
         ),
       ),
     );
@@ -63,7 +58,7 @@ class LoginPageState extends State<LoginPage> {
           ),
           SizedBox(height: 8.0),
           Text(
-            'Login',
+            getTranslated(context, 'login'),
             style: TextStyle(
               fontSize: 40,
               fontFamily: 'SourceSansLight',
@@ -88,7 +83,7 @@ class LoginPageState extends State<LoginPage> {
               borderRadius: BorderRadius.circular(40.0),
             ),
             prefixIcon: Icon(Icons.email),
-            hintText: 'Email',
+            hintText: streamHintText('email'),
             errorText: snapshot.error,
           ),
         );
@@ -109,7 +104,7 @@ class LoginPageState extends State<LoginPage> {
               borderRadius: BorderRadius.circular(40.0),
             ),
             prefixIcon: Icon(Icons.lock),
-            hintText: 'Password',
+            hintText: streamHintText('password'),
             errorText: snapshot.error,
           ),
         );
@@ -125,7 +120,7 @@ class LoginPageState extends State<LoginPage> {
           minWidth: 400.0,
           child: RaisedButton(
             child: Text(
-              'Submit',
+              streamHintText('submit'),
             ),
             textColor: Colors.white,
             color: Colors.blue,
@@ -149,15 +144,14 @@ class LoginPageState extends State<LoginPage> {
   }
 
   Widget _dropDownMenu() {
-    return DropdownButton(
+    return DropdownButton<Language>(
+      hint: Text(
+        getTranslated(context, 'select_language'),
+        style: TextStyle(color: Colors.blue),
+      ),
       onChanged: (Language language) {
         _changeLanguage(language);
       },
-      underline: SizedBox(),
-      icon: Icon(
-        Icons.language,
-        color: Colors.white,
-      ),
       items: Language.languageList()
           .map<DropdownMenuItem<Language>>(
             (lang) => DropdownMenuItem(
@@ -172,7 +166,7 @@ class LoginPageState extends State<LoginPage> {
     );
   }
 
-  String streamHintText(String jsonText){
+  String streamHintText(String jsonText) {
     return getTranslated(context, jsonText);
   }
 }

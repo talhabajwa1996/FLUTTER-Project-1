@@ -1,8 +1,11 @@
 {
     "home" : "ہوم پیج",
     "profile" : "پروفائل",
+    "login" : "لاگ ان کریں",
     "logout" : "لاگ آوٹ",
     "some_text_here" : "کچھ متن یہاں",
     "email" : "ای میل",
-    "password" : "پاس ورڈ"
+    "password" : "پاس ورڈ",
+    "submit" : "جمع کرائیں",
+    "select_language" : "زبان منتخب کریں"
 }

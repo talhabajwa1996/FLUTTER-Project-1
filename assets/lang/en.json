@@ -2,7 +2,10 @@
     "home" : "Home",
     "profile" : "Profile",
     "logout" : "Logout",
+    "login" : "Login",
     "some_text_here" : "SOME TEXT HERE",
     "email" : "Email",
-    "password" : "Password"
+    "password" : "Password",
+    "submit" : "Submit",
+    "select_language" : "Select Language"
 }

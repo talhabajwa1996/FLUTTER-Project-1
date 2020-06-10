@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           locale: _locale,
-          home: Template2And3(),
+          home: LoginPage(),
           // initialRoute: '/',
           // routes: {
           //   '/': (_) => LoginPage(),
