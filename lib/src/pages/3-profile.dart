@@ -1,9 +1,14 @@
 import 'package:App_Project1/src/BLOC/provider.dart';
-import 'package:App_Project1/src/pages/1-login.dart';
 import 'package:flutter/material.dart';
 import '../BLOC/bloc.dart';
+import '../localization/localization_constants.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
+  @override
+  ProfilePageState createState() => ProfilePageState();
+}
+
+class ProfilePageState extends State<ProfilePage> {
   build(context) {
     final bloc = Provider.of(context);
     return MaterialApp(
@@ -56,7 +61,7 @@ class ProfilePage extends StatelessWidget {
               borderRadius: BorderRadius.circular(40.0),
             ),
             prefixIcon: Icon(Icons.email),
-            hintText: 'Email',
+            hintText: streamHintText('email'),
             errorText: snapshot.error,
           ),
         );
@@ -77,7 +82,7 @@ class ProfilePage extends StatelessWidget {
               borderRadius: BorderRadius.circular(40.0),
             ),
             prefixIcon: Icon(Icons.lock),
-            hintText: 'Password',
+            hintText: streamHintText('password'),
             errorText: snapshot.error,
           ),
         );
@@ -92,7 +97,7 @@ class ProfilePage extends StatelessWidget {
         return ButtonTheme(
           minWidth: 400.0,
           child: RaisedButton(
-            child: Text('Logout'),
+            child: Text(streamHintText('logout')),
             textColor: Colors.white,
             color: Colors.blue,
             shape: RoundedRectangleBorder(
@@ -107,5 +112,9 @@ class ProfilePage extends StatelessWidget {
         );
       },
     );
+  }
+
+  String streamHintText(String jsonText){
+    return getTranslated(context, jsonText);
   }
 }

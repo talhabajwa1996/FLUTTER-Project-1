@@ -2,8 +2,25 @@ import 'package:flutter/material.dart';
 import '../BLOC/bloc.dart';
 import '../BLOC/provider.dart';
 import 'page2and3templates.dart';
+import '../../main.dart';
+import '../classes/language.dart';
+import '../localization/localization_constants.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  LoginPageState createState() => LoginPageState();
+}
+
+class LoginPageState extends State<LoginPage> {
+
+
+    void _changeLanguage(Language language) async {
+    Locale _temp = await setLocale(language.languageCode);
+
+    MyApp.setLocale(context, _temp);
+  }
+
+
   build(context) {
     final bloc = Provider.of(context);
     return MaterialApp(
@@ -23,6 +40,8 @@ class LoginPage extends StatelessWidget {
               password(bloc),
               SizedBox(height: 20.0),
               submitButton(bloc),
+              SizedBox(height: 20.0),
+              _dropDownMenu(),
             ],
           ),
         ),
@@ -127,5 +146,33 @@ class LoginPage extends StatelessWidget {
         );
       },
     );
+  }
+
+  Widget _dropDownMenu() {
+    return DropdownButton(
+      onChanged: (Language language) {
+        _changeLanguage(language);
+      },
+      underline: SizedBox(),
+      icon: Icon(
+        Icons.language,
+        color: Colors.white,
+      ),
+      items: Language.languageList()
+          .map<DropdownMenuItem<Language>>(
+            (lang) => DropdownMenuItem(
+              value: lang,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [Text(lang.flag), Text(lang.name)],
+              ),
+            ),
+          )
+          .toList(),
+    );
+  }
+
+  String streamHintText(String jsonText){
+    return getTranslated(context, jsonText);
   }
 }

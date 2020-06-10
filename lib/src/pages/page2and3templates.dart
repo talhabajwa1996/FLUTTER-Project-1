@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import '../pages/2-home.dart';
-import '../pages/3-profile.dart';
+import '2-home.dart';
+import '3-profile.dart';
+import '../classes/language.dart';
+import '../../main.dart';
+import '../localization/localization_constants.dart';
 
 class Template2And3 extends StatefulWidget {
   @override
@@ -10,7 +13,13 @@ class Template2And3 extends StatefulWidget {
 }
 
 class Template2And3State extends State<Template2And3> {
-  final profilePage = ProfilePage();
+  void _changeLanguage(Language language) async {
+    Locale _temp = await setLocale(language.languageCode);
+
+    MyApp.setLocale(context, _temp);
+  }
+
+  final profilePage = ProfilePageState();
   int _currentIndex = 0;
   List<Widget> tabs = [
     HomePage(),
@@ -19,9 +28,13 @@ class Template2And3State extends State<Template2And3> {
   build(context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          pageTitle(_currentIndex),
-        ),
+        title: Text(pageTitle(_currentIndex)),
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: _dropDownMenu(),
+          ),
+        ],
         centerTitle: true,
       ),
       resizeToAvoidBottomPadding: false,
@@ -38,11 +51,11 @@ class Template2And3State extends State<Template2And3> {
       items: [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          title: Text('Home'),
+          title: Text(getTranslated(context, 'home')),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),
-          title: Text('Profile'),
+          title: Text(getTranslated(context, 'profile')),
         ),
       ],
       onTap: (index) {
@@ -103,7 +116,7 @@ class Template2And3State extends State<Template2And3> {
             children: <Widget>[
               Icon(Icons.arrow_back_ios),
               SizedBox(width: 12.0),
-              Text('Logout'),
+              Text(getTranslated(context, 'logout')),
             ],
           ),
           textColor: Colors.white,
@@ -121,7 +134,7 @@ class Template2And3State extends State<Template2And3> {
     return ListTile(
       leading: Icon(Icons.home),
       title: Text(
-        'Home',
+        getTranslated(context, 'home'),
         style: TextStyle(
           fontSize: 15,
         ),
@@ -139,7 +152,7 @@ class Template2And3State extends State<Template2And3> {
     return ListTile(
       leading: Icon(Icons.person),
       title: Text(
-        'Profile',
+        getTranslated(context, 'profile'),
         style: TextStyle(
           fontSize: 15,
         ),
@@ -153,11 +166,35 @@ class Template2And3State extends State<Template2And3> {
     );
   }
 
+  Widget _dropDownMenu() {
+    return DropdownButton(
+      onChanged: (Language language) {
+        _changeLanguage(language);
+      },
+      underline: SizedBox(),
+      icon: Icon(
+        Icons.language,
+        color: Colors.white,
+      ),
+      items: Language.languageList()
+          .map<DropdownMenuItem<Language>>(
+            (lang) => DropdownMenuItem(
+              value: lang,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [Text(lang.flag), Text(lang.name)],
+              ),
+            ),
+          )
+          .toList(),
+    );
+  }
+
   String pageTitle(pageno) {
     if (pageno == 0) {
-      return 'Home';
+      return getTranslated(context, 'home');
     } else {
-      return 'Profile';
+      return getTranslated(context, 'profile');
     }
   }
 }
