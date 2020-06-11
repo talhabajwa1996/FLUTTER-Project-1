@@ -3,7 +3,7 @@ import '../BLOC/bloc.dart';
 import '../BLOC/provider.dart';
 import 'page2and3templates.dart';
 import '../../main.dart';
-import '../classes/language.dart';
+import '../models/language.dart';
 import '../localization/localization_constants.dart';
 
 class LoginPage extends StatefulWidget {

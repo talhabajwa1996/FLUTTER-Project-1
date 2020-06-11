@@ -1,11 +1,9 @@
 import 'package:App_Project1/src/localization/app_localization.dart';
 import 'package:App_Project1/src/localization/localization_constants.dart';
-import 'package:App_Project1/src/pages/2-home.dart';
-import 'package:App_Project1/src/pages/page2and3templates.dart';
+import 'package:App_Project1/src/pages/wrapper/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'src/pages/1-login.dart';
-//import 'src/pages/page2and3templates.dart';
+// import 'src/pages/1-login.dart';
 import 'src/BLOC/provider.dart';
 
 void main() => runApp(MyApp());
@@ -52,12 +50,7 @@ class _MyAppState extends State<MyApp> {
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           locale: _locale,
-          home: LoginPage(),
-          // initialRoute: '/',
-          // routes: {
-          //   '/': (_) => LoginPage(),
-          //   '/Home_Page': (_) => Template2And3()
-          // },
+          home: Wrapper(),
           supportedLocales: [
             Locale('en', 'US'),
             Locale('ur', 'PK'),

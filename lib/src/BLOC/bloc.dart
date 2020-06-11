@@ -1,5 +1,5 @@
 import 'package:rxdart/rxdart.dart';
-import '../mixins/validation_mixin.dart';
+import 'validation_mixin.dart';
 
 class Bloc extends Object with Validators{
 

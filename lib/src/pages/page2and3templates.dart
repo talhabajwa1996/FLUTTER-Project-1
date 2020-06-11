@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '2-home.dart';
 import '3-profile.dart';
-import '../classes/language.dart';
+import '../models/language.dart';
 import '../../main.dart';
 import '../localization/localization_constants.dart';
 
