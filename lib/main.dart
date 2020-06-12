@@ -1,9 +1,21 @@
+/*
+*This project has the following specifications:
+=> BLOC patern Impletation using Scoped Instances
+=> Internationalization with 
+=> Navigation from Login Page to HomePage(containing a Template Page with bottom navigation bar containing Home and Profile tabs)
+
+*This project is entountring the following issue so far:
+=> Issue in navigating back to Login Screen after the Logout button is pressed.
+
+*Dated: June 13, 2020
+*Author: Talha Bajwa
+*/
+
 import 'package:App_Project1/src/localization/app_localization.dart';
 import 'package:App_Project1/src/localization/localization_constants.dart';
-import 'package:App_Project1/src/pages/wrapper/wrapper.dart';
+import 'package:App_Project1/src/pages/1-login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-// import 'src/pages/1-login.dart';
 import 'src/BLOC/provider.dart';
 
 void main() => runApp(MyApp());
@@ -50,7 +62,7 @@ class _MyAppState extends State<MyApp> {
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           locale: _locale,
-          home: Wrapper(),
+          home: LoginPage(),
           supportedLocales: [
             Locale('en', 'US'),
             Locale('ur', 'PK'),

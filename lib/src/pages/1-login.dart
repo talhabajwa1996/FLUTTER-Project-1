@@ -24,7 +24,6 @@ class LoginPageState extends State<LoginPage> {
       resizeToAvoidBottomPadding: false,
       body: Container(
         margin: EdgeInsets.all(20.0),
-        // child: _dropDownMenu(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
